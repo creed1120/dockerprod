@@ -14,11 +14,7 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Create .env file
-        run: echo 'PORT=${{ secrets.PORT }}', 'NGINXGROUP=${{ secrets.NGINXGROUP }}' > .env
-          # echo  > .env
-          # echo 'NGINXUSER=${{ secrets.NGINXUSER }}' > .env
-          # echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
-          # echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
+        run: echo 'PORT=${{ secrets.PORT }}' > .env
 
       - name: cd into /src && add APP_KEY
         run: cd ./src && cp .env.example .env
