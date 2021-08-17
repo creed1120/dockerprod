@@ -23,14 +23,9 @@ jobs:
       - name: cd into /src && add APP_KEY
         run: cd ./src && 
           cp .env.example .env && 
-          docker-compose run --rm composer install && 
-          docker-compose run --rm artisan key:generate
 
       - name: Run build
         run: docker-compose up -d --build site
 
-      - name: Run Composer
-        run: docker-compose run --rm composer install
-
-      - name: Run Build
-        run: docker-compose up -d
+      # - name: Run Composer
+      #   run: docker-compose run --rm composer install
