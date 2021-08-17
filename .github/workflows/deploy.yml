@@ -15,11 +15,7 @@ jobs:
 
       - name: Create .env file
         run: |  
-        echo 'PORT=${{ secrets.PORT }}' > .env
-        echo 'NGINXGROUP=${{ secrets.NGINXGROUP }}' > .env
-        echo 'NGINXUSER=${{ secrets.NGINXUSER }}' > .env
-        echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
-        echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
+        echo 'PORT=${{ secrets.PORT }} NGINXGROUP=${{ secrets.NGINXGROUP }} NGINXUSER=${{ secrets.NGINXUSER }} PHPGROUP=${{ secrets.PHPGROUP }} PHPUSER=${{ secrets.PHPUSER }}' > .env
 
       - name: Run Build
         run: docker-compose up -d
