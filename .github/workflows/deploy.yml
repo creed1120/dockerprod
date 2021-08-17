@@ -22,10 +22,7 @@ jobs:
 
       - name: cd into /src && add APP_KEY
         run: cd ./src && 
-          cp .env.example .env && 
+          cp .env.example .env
 
       - name: Run build
-        run: docker-compose up -d --build site
-
-      # - name: Run Composer
-      #   run: docker-compose run --rm composer install
+        run: docker-compose up -d
