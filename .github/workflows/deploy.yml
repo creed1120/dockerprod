@@ -14,10 +14,17 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Create .env file
-        run: echo 'PORT=${{ secrets.PORT }}' > .env
+        run: echo 'PORT=${{ secrets.PORT }} NGINXGROUP=${{ secrets.NGINXGROUP }}' > .env
+          # echo  > .env
+          # echo 'NGINXUSER=${{ secrets.NGINXUSER }}' > .env
+          # echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
+          # echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
       - name: cd into /src && add APP_KEY
         run: cd ./src && cp .env.example .env
 
       - name: Run build
-        run: docker-compose up -d
+        run: docker-compose up -d --build site
+
+      # - name: Run Composer
+      #   run: docker-compose run --rm composer install
