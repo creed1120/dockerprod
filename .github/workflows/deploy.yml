@@ -14,12 +14,12 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Create .env file
-        run: echo 'PORT=${{ secrets.PORT }}' > .env
-
-        run: echo 'NGINXGROUP=${{ secrets.NGINXGROUP }}' > .env
-        run: echo 'NGINXUSER=${{ secrets.NGINXUSER }}' > .env
-        run: echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
-        run: echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
+        run: |  
+        echo 'PORT=${{ secrets.PORT }}' > .env
+        echo 'NGINXGROUP=${{ secrets.NGINXGROUP }}' > .env
+        echo 'NGINXUSER=${{ secrets.NGINXUSER }}' > .env
+        echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
+        echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
       - name: Run Build
         run: docker-compose up -d
