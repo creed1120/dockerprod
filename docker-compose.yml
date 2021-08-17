@@ -13,7 +13,7 @@ services:
         - NGINXGROUP=${NGINXGROUP:-www-data}
     container_name: nginx
     ports:
-      - 80:80
+      - ${PORT:-8000}:80
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
@@ -40,6 +40,24 @@ services:
       SERVICE_NAME: mysql
     networks:
       - laravel
+
+  # phpmyadmin
+  phpmyadmin:
+    # Use phpmyadmin/phpmyadmin:5.0.2 image
+    image: phpmyadmin/phpmyadmin:5.0.2
+    # Connect to "my-network" network, as defined below
+    networks:
+      - laravel
+    # Map port 8080 on the host to port 80 inside the container
+    # Syntax is: "HOST_PORT:CONTAINER_PORT"
+    ports:
+      - "8080:80"
+    # Pass a list of environment variables to the container
+    environment:
+      PMA_HOST: mysql
+    # Wait for "mysql" container to start first
+    depends_on:
+      - mysql
 
   php:
     build:
