@@ -31,5 +31,5 @@ jobs:
       - name: cd into /src && add APP_KEY
         run: cd ./src &&
           cp .env.example .env &&
-          docker-compose run --rm composer install &&
+          composer install &&
           docker-compose run --rm artisan key:generate
