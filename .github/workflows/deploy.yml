@@ -20,11 +20,8 @@ jobs:
           # echo 'PHPGROUP=${{ secrets.PHPGROUP }}' > .env
           # echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
-      - name: Mount ./src dir to /var/www/html in the Container
-        run: mkdir /var/www/html && cp ./src /var/www/html
-
       - name: cd into /src && add APP_KEY
-        run: cd ./src && cp .env.example .env && docker-compose run --rm composer install && docker-compose run --rm artisan key:generate
+        run: cd ./src && cp .env.example .env && composer install && docker-compose run --rm artisan key:generate
 
       - name: Run build
         run: docker-compose up -d
