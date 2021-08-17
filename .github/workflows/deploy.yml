@@ -25,11 +25,11 @@ jobs:
       - name: PHP User
         run: echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
+      - name: Run Build
+        run: docker-compose up -d
+
       - name: cd into /src && add APP_KEY
         run: cd ./src && 
           cp .env.example .env && 
           docker-compose run --rm composer install && 
           docker-compose run --rm artisan key:generate
-
-      - name: Run Build
-        run: docker-compose up -d
