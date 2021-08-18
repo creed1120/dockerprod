@@ -11,19 +11,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: apt update
-        run: apt-get update -y && apt-get install -y libmcrypt-dev openssl
-      - name: PDO install
-        run: docker-php-ext-install pdo mcrypt mbstring
-      - name: php install
-        run: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-      - name: PDO second install
-        run: docker-php-ext-install pdo mcrypt mbstring
-
-      - name: Copy app
-        run: cp ./src /var/www/html
+      - uses: actions/checkout@main
 
       - name: Create .env file
         run: echo 'PORT=${{ secrets.PORT }}' > .env
@@ -33,7 +21,7 @@ jobs:
           # echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
       - name: cd into /src && add APP_KEY
-        run: cd ./src && cp .env.example .env && composer install
+        run: cd ./src && cp .env.example .env && docker-compose run --rm composer install && docker-compose run --rm artisan key:generate
 
       - name: Run build
         run: docker-compose up -d
