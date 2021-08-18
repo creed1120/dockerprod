@@ -21,7 +21,10 @@ jobs:
           # echo 'PHPUSER=${{ secrets.PHPUSER }}' > .env
 
       - name: cd into /src && add APP_KEY
-        run: cd ./src && cp .env.example .env && docker-compose run --rm composer install && docker-compose run --rm artisan key:generate
+        run: cd ./src && cp .env.example .env
+
+      - name: Run Composer install
+        run: docker-compose run --rm composer install
 
       - name: Run build
         run: docker-compose up -d
